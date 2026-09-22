@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelompok IV</title>
+    <style>
+        :root {
+            --bg-color: #fbfbfd;
+            --text-main: #1d1d1f;
+            --text-muted: #86868b;
+            --border-color: #d2d2d7;
+            --nav-bg: rgba(251, 251, 253, 0.6);
+            --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #000000;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+            --border-color: #424245;
+            --nav-bg: rgba(0, 0, 0, 0.6);
+            
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: var(--font-apple);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: var(--nav-bg);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            box-sizing: border-box;
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.3rem;
+            text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-theme {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            font-family: var(--font-apple);
+            font-weight: 500;
+            font-size: 0.85rem;
+            border-radius: 980px; 
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-theme:hover {
+            transform: translateY(-2px);
+            background: var(--text-main);
+            color: var(--bg-color);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .en-text { display: none; }
+        
+        body.lang-en .en-text { display: block; }
+        body.lang-en span.en-text { display: inline; }
+        body.lang-en .id-text { display: none; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 8rem 5% 4rem;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 7rem;
+            align-items: center;
+        }
+
+        @media (min-width: 769px) {
+            .hero.reverse .hero-img-container { order: 2; }
+            .hero.reverse .hero-text { order: 1; }
+        }
+
+        .hero-img-container {
+            overflow: hidden;
+            border-radius: 18px; 
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .hero-img-container:hover .hero-img {
+            transform: scale(1.03);
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin: 0.5rem 0 1.2rem;
+            line-height: 1.1;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .category {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem 2rem;
+        }
+
+        .news-card {
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .news-card:hover .news-img {
+            transform: scale(1.02);
+        }
+
+        .news-card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin: 0.5rem 0;
+            line-height: 1.3;
+        }
+
+        .implication {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-left: 2px solid var(--text-main);
+            padding-left: 1rem;
+            margin-top: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-img { height: 300px; }
+            .hero-text h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">Logika Informatika - Kelompok IV</a>
+        <div class="nav-actions">
+            <button id="lang-toggle" class="btn-theme">EN</button>
+            <button id="theme-toggle" class="btn-theme">
+                <span class="id-text">Mode</span>
+                <span class="en-text">Mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero reveal">
+            <div class="hero-img-container">
+                <img src="https://static.wikia.nocookie.net/folktales/images/7/7d/Sangkuriang10.jpg/revision/latest?cb=20111127214053" alt="Gunung Tangkuban Perahu" class="hero-img">
+            </div>
+            <div class="hero-text">
+                <span class="category id-text">Folklor Nusantara</span>
+                <span class="category en-text">Nusantara Folklore</span>
+                
+                <h1 class="id-text">Sangkuriang & Tangkuban Perahu</h1>
+                <h1 class="en-text">Sangkuriang & Mount Tangkuban Perahu</h1>
+                
+                <p class="id-text">Sangkuriang, seorang pemuda sakti, tanpa sadar jatuh cinta pada ibu kandungnya sendiri, Dayang Sumbi. Untuk menggagalkan niat pernikahan tersebut, Dayang Sumbi memberinya syarat mustahil: membendung sungai dan membuat perahu besar hanya dalam satu malam.</p>
+                <p class="en-text">Sangkuriang, a young man with magical powers, unknowingly fell in love with his own biological mother, Dayang Sumbi. To thwart the marriage, Dayang Sumbi gave him an impossible condition: dam a river and build a massive boat in just one night.</p>
+                
+                <p class="id-text">Saat Sangkuriang hampir berhasil, Dayang Sumbi memalsukan datangnya fajar. Karena marah merasa gagal, Sangkuriang menendang perahu buatannya hingga terbalik, yang kini dikenal sebagai <b>Gunung Tangkuban Perahu</b>.</p>
+                <p class="en-text">When Sangkuriang almost succeeded, Dayang Sumbi faked the break of dawn. Enraged by his perceived failure, Sangkuriang kicked his boat upside down, which is now known as <b>Mount Tangkuban Perahu</b>.</p>
+            </div>
+        </section>
+
+        <section class="hero reverse reveal">
+            <div class="hero-img-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpVaXoctFCqBREyaNteFB91J1C8rF5FxVV9g7gykOduQ&s=10" alt="Batu Karang di Pantai" class="hero-img">
+            </div>
+            <div class="hero-text">
+                <span class="category id-text">Folklor Nusantara</span>
+                <span class="category en-text">Nusantara Folklore</span>
+                
+                <h1 class="id-text">Malin Kundang & Kutukan Batu</h1>
+                <h1 class="en-text">Malin Kundang & The Stone Curse</h1>
+                
+                <p class="id-text">Kisah seorang anak miskin dari Minangkabau yang merantau dan sukses menjadi saudagar kaya raya. Namun, saat kapalnya bersandar kembali ke kampung halamannya, ia malu dan enggan mengakui ibu kandungnya yang renta dan miskin.</p>
+                <p class="en-text">The story of a poor boy from Minangkabau who migrated and succeeded in becoming a wealthy merchant. However, when his ship docked back in his hometown, he was ashamed and refused to acknowledge his elderly, poor mother.</p>
+                
+                <p class="id-text">Sang ibu yang sakit hati akhirnya memanjatkan doa. Seketika badai datang, kapal hancur disambar petir, dan Malin Kundang dikutuk berubah menjadi <b>batu karang yang bersujud</b>, memohon ampunan yang tak pernah ia dapatkan.</p>
+                <p class="en-text">The heartbroken mother finally prayed to God. Instantly, a storm arrived, the ship was destroyed by lightning, and Malin Kundang was cursed and turned into a <b>prostrating rock</b>, begging for forgiveness he would never receive.</p>
+            </div>
+        </section>
+
+        <h2 class="section-title reveal id-text">Kabar Utama & Implikasi</h2>
+        <h2 class="section-title reveal en-text">Headline News & Implications</h2>
+        
+        <div class="news-grid">
+            <article class="news-card reveal">
+                <img src="https://images.bloombergtechnoz.com/data/2026/09/image-20260901151151.jpeg" alt="Beras" class="news-img">
+                <span class="category id-text">Ekonomi</span>
+                <span class="category en-text">Economy</span>
+                <h2 class="id-text">Harga beras lokal naik 10% minggu ini akibat cuaca buruk dan gagal panen.</h2>
+                <h2 class="en-text">Local rice prices increased by 10% this week due to bad weather and crop failure.</h2>
+                <p class="implication id-text">Menurunnya daya beli masyarakat menengah ke bawah untuk kebutuhan pokok lainnya.</p>
+                <p class="implication en-text">Decreased purchasing power among lower-middle-class communities for other basic needs.</p>
+            </article>
+
+            <article class="news-card reveal">
+                <img src="https://images.bisnis.com/posts/2026/09/20/2005605/16052026-BI-ARF-22-MRT-5_1779074389.jpg" alt="MRT" class="news-img">
+                <span class="category id-text">Infrastruktur</span>
+                <span class="category en-text">Infrastructure</span>
+                <h2 class="id-text">Pembangunan jalur MRT fase terbaru resmi dimulai di Jakarta Barat.</h2>
+                <h2 class="en-text">The construction of the latest MRT phase has officially started in West Jakarta.</h2>
+                <p class="implication id-text">Terjadi kemacetan sementara di sekitar area proyek, namun akan mempercepat mobilitas masa depan.</p>
+                <p class="implication en-text">Temporary traffic congestion around the project area, but it will accelerate future mobility.</p>
+            </article>
+
+            <article class="news-card reveal">
+                <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=600" alt="Mobil Listrik" class="news-img">
+                <span class="category id-text">Kebijakan</span>
+                <span class="category en-text">Policy</span>
+                <h2 class="id-text">Pemerintah memberlakukan pajak 0% untuk pembelian kendaraan listrik (EV).</h2>
+                <h2 class="en-text">The government implemented a 0% tax for electric vehicle (EV) purchases.</h2>
+                <p class="implication id-text">Lonjakan minat dan penjualan mobil listrik, serta pergeseran tren otomotif nasional.</p>
+                <p class="implication en-text">A surge in interest and sales of electric cars, as well as a shift in national automotive trends.</p>
+            </article>
+
+            <article class="news-card reveal">
+              <img src="https://persija.id/persija-assets/assets/uploads/media-uploader/YU5NX6rBjfIcjzOLdul1.webp" alt="Persija vs Persib" class="news-img">
+              <span class="category id-text">Olahraga</span>
+              <span class="category en-text">Sports</span>
+              <h2 class="id-text">Persija Jakarta sukses mengalahkan Persib Bandung dengan skor tipis 2-1.</h2>
+              <h2 class="en-text">Persija Jakarta successfully defeated Persib Bandung with a narrow 2-1 scoreline.</h2>
+              <p class="implication id-text">Kemenangan di pekan-pekan awal Super League ini memberikan tambahan 3 poin krusial bagi Persija untuk bersaing di papan atas klasemen sementara.</p>
+              <p class="implication en-text">The victory in these early weeks of the Super League secures three crucial points for Persija, enabling them to contend for a spot at the top of the provisional standings.</p>
+            </article>
+
+            <article class="news-card reveal">
+                <img src="https://cdn0-production-images-kly.akamaized.net/lQosiCLTkfBWs4KQ8KCrf2AjrUc=/1280x720/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2796637/original/068265500_1557051237-IMG-20190505-WA0050.jpg" alt="Cuaca Buruk" class="news-img">
+                <span class="category id-text">Lingkungan</span>
+                <span class="category en-text">Environment</span>
+                <h2 class="id-text">Hujan es dan angin puting beliung melanda sebagian wilayah Bogor sore tadi.</h2>
+                <h2 class="en-text">Hail and tornadoes hit parts of the Bogor area this afternoon.</h2>
+                <p class="implication id-text">Warga harus meningkatkan kewaspadaan terhadap cuaca ekstrem dan potensi kerusakan infrastruktur ringan.</p>
+                <p class="implication en-text">Residents must increase vigilance against extreme weather and potential minor infrastructure damage.</p>
+            </article>
+
+            <article class="news-card reveal">
+                <img src="https://www.psn.co.id/wp-content/uploads/2025/09/PSN_Nusantara_Lima_05.jpg" alt="Satelit Bumi" class="news-img">
+                <span class="category id-text">Teknologi</span>
+                <span class="category en-text">Technology</span>
+                <h2 class="id-text">Satelit internet terbaru sukses diluncurkan ke orbit pagi ini.</h2>
+                <h2 class="en-text">The latest internet satellite was successfully launched into orbit this morning.</h2>
+                <p class="implication id-text">Membuka peluang akses digitalisasi yang merata bagi daerah tertinggal dan terluar di Indonesia.</p>
+                <p class="implication en-text">Opens opportunities for equitable digitalization access for underdeveloped and outermost regions in Indonesia.</p>
+            </article>
+        </div>
+    </div>
+
+    <footer class="reveal">
+        Kelompok IV
+    </footer>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+        });
+
+        const langToggleBtn = document.getElementById('lang-toggle');
+        const bodyElement = document.body;
+
+        langToggleBtn.addEventListener('click', () => {
+            bodyElement.classList.toggle('lang-en');
+            if (bodyElement.classList.contains('lang-en')) {
+                langToggleBtn.textContent = 'ID';
+            } else {
+                langToggleBtn.textContent = 'EN';
+            }
+        });
+
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 50;
+
+            revealElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        setTimeout(revealOnScroll, 100);
+    </script>
+</body>
+</html>

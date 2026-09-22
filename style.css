@@ -1,0 +1,201 @@
+:root {
+    --bg-color: #fdfbf7;
+    --text-main: #1a1a1a;
+    --text-muted: #555555;
+    --border-color: #d1cfc7;
+    --nav-bg: rgba(253, 251, 247, 0.85);
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-main: #f0f0f0;
+    --text-muted: #a0a0a0;
+    --border-color: #333333;
+    --nav-bg: rgba(18, 18, 18, 0.85);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    box-sizing: border-box;
+    transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+.btn-theme {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-theme:hover {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8rem 5% 4rem;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 6rem;
+    align-items: center;
+}
+
+@media (min-width: 769px) {
+    .hero.reverse .hero-img-container {
+        order: 2;
+    }
+    .hero.reverse .hero-text {
+        order: 1;
+    }
+}
+
+.hero-img-container {
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.hero-img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+}
+
+.hero-img-container:hover .hero-img {
+    transform: scale(1.05);
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    margin: 0.5rem 0 1.5rem;
+    line-height: 1.1;
+}
+
+.category {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3.5rem 2.5rem;
+}
+
+.news-card {
+    padding: 1.5rem;
+    border: 1px solid transparent;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card:hover {
+    border-color: var(--border-color);
+    transform: translateY(-5px);
+}
+
+.news-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-img {
+    transform: scale(1.03);
+}
+
+.news-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    margin: 0.8rem 0;
+    line-height: 1.4;
+}
+
+.implication {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    border-left: 2px solid var(--text-main);
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+footer {
+    text-align: center;
+    padding: 3rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4rem;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-img { height: 300px; }
+    .hero-text h1 { font-size: 2.5rem; }
+}
